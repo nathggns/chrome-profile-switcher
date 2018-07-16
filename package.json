@@ -1,0 +1,12 @@
+{
+  "name": "chrome-profile-switcher",
+  "version": "0.0.1",
+  "description": "A CLI for switching between chrome profiles on macOS",
+  "main": "index.js",
+  "repository": "https://github.com/nathggns/chrome-profile-switcher",
+  "author": "Nate Higgins",
+  "license": "MIT",
+  "bin": {
+    "chrome-profile-switcher": "./index.js"
+  }
+}
