@@ -10,7 +10,7 @@ const PATH = join(process.env.HOME, 'Library', 'Application Support', 'Google', 
 
 const findProfileId = (currentState, name) =>
     Object.entries(currentState.profile.info_cache)
-        .find(([ id, profile ]) => id === name || profile.name === name || profile.gaia_given_name === name)[0];
+        .find(([ id, profile ]) => id.toLowerCase() === name || (profile.name && profile.name.toLowerCase() === name) || (profile.gaia_given_name && profile.gaia_given_name.toLowerCase() === name))[0];
 
 
 const commands = {
@@ -20,7 +20,7 @@ const commands = {
         await exec(`cp "${PATH}" "${PATH}-backup-${new Date().getTime()}"`);
 
         const currentState = JSON.parse(await readFile(PATH));
-        const id = findProfileId(currentState, profileName);
+        const id = findProfileId(currentState, profileName.toLowerCase());
         currentState.profile.last_used = id;
         currentState.profile.last_active_profiles = [id];
         await writeFile(PATH, JSON.stringify(currentState));
